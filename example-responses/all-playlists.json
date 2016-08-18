@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "rate_limit": {
+    "reset": 1471530300,
+    "limit": 50,
+    "remaining": 49
+  },
+  "channels": [
+    {
+      "videos": {
+        "total": 1
+      },
+      "link": null,
+      "description": null,
+      "key": "bITKS2O3",
+      "title": "Space",
+      "views": 0,
+      "author": null,
+      "type": "manual",
+      "custom": {}
+    }
+  ],
+  "limit": 50,
+  "offset": 0,
+  "total": 1
+}

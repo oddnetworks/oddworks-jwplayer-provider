@@ -1,0 +1,43 @@
+{
+  "name": "oddworks-jwplayer-provider",
+  "version": "1.1.0",
+  "description": "An Oddworks provider plugin for JWPlayer APIs",
+  "main": "index.js",
+  "scripts": {
+    "test": "xo && jasmine"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "boom": "^3.2.2",
+    "request": "^2.74.0",
+    "yargs": "^4.8.1"
+  },
+  "devDependencies": {
+    "jasmine": "^2.4.1",
+    "oddcast": "^2.1.0",
+    "xo": "^0.16.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oddnetworks/oddworks-jwplayer-provider.git"
+  },
+  "keywords": [
+    "Oddworks",
+    "JWPlayer",
+    "Video",
+    "Source",
+    "Provider"
+  ],
+  "author": "Oddworks Inc.",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/oddnetworks/oddworks-jwplayer-provider/issues"
+  },
+  "homepage": "https://github.com/oddnetworks/oddworks-jwplayer-provider#readme",
+  "xo": {
+    "esnext": true,
+    "envs": [
+      "node"
+    ]
+  }
+}

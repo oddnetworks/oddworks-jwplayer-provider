@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "rate_limit": {
+    "reset": 1471530300,
+    "limit": 50,
+    "remaining": 47
+  },
+  "video": {
+    "trim_out_point": null,
+    "duration": "8.06",
+    "size": "6403429",
+    "trim_in_point": null,
+    "sourceurl": null,
+    "sourcetype": "file",
+    "title": "Old Odd Logo",
+    "tags": null,
+    "custom": {},
+    "status": "ready",
+    "description": null,
+    "views": 2,
+    "sourceformat": null,
+    "mediatype": "video",
+    "link": null,
+    "key": "617kMdbG",
+    "date": 1471030486,
+    "md5": "7afc2da385640da0ef64567112b246db",
+    "expires_date": null,
+    "author": null,
+    "error": null,
+    "upload_session_id": null
+  }
+}

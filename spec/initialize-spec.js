@@ -42,17 +42,17 @@ describe('initialize', function () {
 		});
 
 		it('calls createPlaylistHandler', function () {
-			expect(provider.createLabelHandler).toHaveBeenCalledTimes(1);
-			const args = provider.createPLaylistHandler.calls.allArgs()[0];
+			expect(provider.createPlaylistHandler).toHaveBeenCalledTimes(1);
+			const args = provider.createPlaylistHandler.calls.allArgs()[0];
 			expect(args[0]).toBe(bus);
 			expect(typeof args[1]).toBe('function');
 			expect(args[2]).toBe(result.client);
 			expect(args[3]).toBe(defaultCollectionTransform);
 		});
 
-		it('calls createAssetHandler', function () {
-			expect(provider.createAssetHandler).toHaveBeenCalledTimes(1);
-			const args = provider.createAssetHandler.calls.allArgs()[0];
+		it('calls createVideoHandler', function () {
+			expect(provider.createVideoHandler).toHaveBeenCalledTimes(1);
+			const args = provider.createVideoHandler.calls.allArgs()[0];
 			expect(args[0]).toBe(bus);
 			expect(typeof args[1]).toBe('function');
 			expect(args[2]).toBe(result.client);

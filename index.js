@@ -6,7 +6,7 @@ const defaultVideoTransform = require('./lib/default-video-transform');
 const defaultCollectionTransform = require('./lib/default-collection-transform');
 const createChannelCache = require('./lib/create-channel-cache');
 const fetchJWPlayerVideo = require('./lib/fetch-jwplayer-video');
-const fetchJWPlayerCollection = require('./lib/fetch-jwplayer-collection');
+const fetchJWPlayerCollection = require('./lib/fetch-jwplayer-playlist');
 
 const DEFAULTS = {
 	baseUrl: 'https://api.jwplayer.com',

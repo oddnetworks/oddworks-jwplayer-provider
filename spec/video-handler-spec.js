@@ -66,7 +66,6 @@ describe('videoHandler', function () {
 		let result = null;
 		let error = null;
 		const video = {VIDEO: 'VIDEO'};
-		const video = {VIDEO: 'VIDEO'};
 		const spec = {
 			channel: 'abc',
 			type: 'videoSpec',
@@ -125,7 +124,6 @@ describe('videoHandler', function () {
 	describe('with Channel secrets', function () {
 		let result = null;
 		let error = null;
-		const video = {VIDEO: 'VIDEO'};
 		const video = {VIDEO: 'VIDEO'};
 		const spec = {
 			channel: 'abc',

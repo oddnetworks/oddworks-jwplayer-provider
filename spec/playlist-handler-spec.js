@@ -76,7 +76,6 @@ describe('playlistHandler', function () {
 			playlist
 		};
 		const videos = [{title: 'VIDEO_1'}, {title: 'VIDEO_2'}];
-		const playlists = [];
 		const collection = {title: 'COLLECTION'};
 
 		function getChannel() {
@@ -164,7 +163,6 @@ describe('playlistHandler', function () {
 			playlist
 		};
 		const videos = [{title: 'VIDEO_1'}, {title: 'VIDEO_2'}];
-		const playlists = [];
 		const collection = {title: 'COLLECTION'};
 
 		function getChannel() {

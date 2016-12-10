@@ -12,7 +12,7 @@ describe('playlistHandler', function () {
 	describe('when jwplayer playlist not found', function () {
 		let result = null;
 		let error = null;
-		let event = null;
+		let errEvent = null;
 		const spec = {
 			channel: 'abc',
 			type: 'collectionSpec',
@@ -28,7 +28,7 @@ describe('playlistHandler', function () {
 			const bus = this.createBus();
 
 			bus.observe({level: 'error'}, function (payload) {
-				event = payload;
+				errEvent = payload;
 			});
 
 			const client = provider.createClient({apiKey: 'foo', secretKey: 'bar'});
@@ -55,10 +55,10 @@ describe('playlistHandler', function () {
 		});
 
 		it('has an error event', function () {
-			expect(event.code).toBe('JW_CHANNEL_PLAYLIST_NOT_FOUND');
-			expect(event.message).toBe('playlist not found');
-			expect(event.error.code).toBe('JW_CHANNEL_PLAYLIST_NOT_FOUND');
-			expect(event.spec.playlist.id).toBe('foo');
+			expect(errEvent.code).toBe('JW_CHANNEL_PLAYLIST_NOT_FOUND');
+			expect(errEvent.message).toBe('playlist not found');
+			expect(errEvent.error.code).toBe('JW_CHANNEL_PLAYLIST_NOT_FOUND');
+			expect(errEvent.spec.playlist.id).toBe('foo');
 		});
 	});
 

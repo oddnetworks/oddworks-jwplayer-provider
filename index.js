@@ -85,7 +85,7 @@ exports.createPlaylistHandler = function (bus, getChannel, client, transform) {
 };
 
 exports.createVideoHandler = function (bus, getChannel, client, transform) {
-	const getVideo = fetchJWPlayerVideo(bus, client, transform);
+	const getJWPlayerVideo = fetchJWPlayerVideo(bus, client, transform);
 
 	// Called from Oddworks core via bus.query
 	// Expects:
@@ -94,16 +94,16 @@ exports.createVideoHandler = function (bus, getChannel, client, transform) {
 		const spec = args.spec;
 		const channelId = spec.channel;
 		const video = spec.video || {};
-		const videoId = video.key;
+		const videoId = video.id;
 
 		if (!videoId || typeof videoId !== 'string') {
 			throw new Error(
-				'jwplayer-asset-provider spec.asset.id String is not available'
+				'jwplayer-video-provider spec.video.id String is not available'
 			);
 		}
 
 		return getChannel(channelId).then(channel => {
-			return getVideo({spec, channel, videoId});
+			return getJWPlayerVideo({spec, channel, videoId});
 		});
 	};
 };

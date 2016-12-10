@@ -12,7 +12,7 @@ describe('playlistHandler', function () {
 	describe('when jwplayer playlist not found', function () {
 		let result = null;
 		let error = null;
-		let event = null;
+		let errEvent = null;
 		const spec = {
 			channel: 'abc',
 			type: 'collectionSpec',
@@ -28,7 +28,7 @@ describe('playlistHandler', function () {
 			const bus = this.createBus();
 
 			bus.observe({level: 'error'}, function (payload) {
-				event = payload;
+				errEvent = payload;
 			});
 
 			const client = provider.createClient({apiKey: 'foo', secretKey: 'bar'});
@@ -51,14 +51,14 @@ describe('playlistHandler', function () {
 		});
 
 		it('has an error', function () {
-			expect(error.code).toBe('PLAYLIST_NOT_FOUND');
+			expect(error.code).toBe('JW_CHANNEL_PLAYLIST_NOT_FOUND');
 		});
 
 		it('has an error event', function () {
-			expect(event.code).toBe('PLAYLIST_NOT_FOUND');
-			expect(event.message).toBe('playlist not found');
-			expect(event.error.code).toBe('PLAYLIST_NOT_FOUND');
-			expect(event.spec.playlist.id).toBe('foo');
+			expect(errEvent.code).toBe('JW_CHANNEL_PLAYLIST_NOT_FOUND');
+			expect(errEvent.message).toBe('playlist not found');
+			expect(errEvent.error.code).toBe('JW_CHANNEL_PLAYLIST_NOT_FOUND');
+			expect(errEvent.spec.playlist.id).toBe('foo');
 		});
 	});
 
@@ -76,7 +76,6 @@ describe('playlistHandler', function () {
 			playlist
 		};
 		const videos = [{title: 'VIDEO_1'}, {title: 'VIDEO_2'}];
-		const playlists = [];
 		const collection = {title: 'COLLECTION'};
 
 		function getChannel() {
@@ -86,7 +85,7 @@ describe('playlistHandler', function () {
 		beforeAll(function (done) {
 			const bus = this.createBus();
 
-			// Mock the Oddworks setItemSpec command for the related assets (videos).
+			// Mock the Oddworks setItemSpec command for the related videos.
 			setItemSpec = jasmine
 				.createSpy('setItemSpec')
 				.and.returnValues(
@@ -141,12 +140,20 @@ describe('playlistHandler', function () {
 
 		it('calls client.getPlaylist()', function () {
 			expect(client.getPlaylist).toHaveBeenCalledTimes(1);
-			expect(client.getPlaylist).toHaveBeenCalledWith({playlistId: 'foo'});
+			expect(client.getPlaylist).toHaveBeenCalledWith({
+				playlistId: 'foo',
+				apiKey: 'foo',
+				secretKey: 'bar'
+			});
 		});
 
-		it('calls client.getAssetsByLabel()', function () {
+		it('calls client.getVideosByPlaylist()', function () {
 			expect(client.getVideosByPlaylist).toHaveBeenCalledTimes(1);
-			expect(client.getVideosByPlaylist).toHaveBeenCalledWith({playlistId: 'foo'});
+			expect(client.getVideosByPlaylist).toHaveBeenCalledWith({
+				playlistId: 'foo',
+				apiKey: 'foo',
+				secretKey: 'bar'
+			});
 		});
 	});
 
@@ -164,15 +171,14 @@ describe('playlistHandler', function () {
 			playlist
 		};
 		const videos = [{title: 'VIDEO_1'}, {title: 'VIDEO_2'}];
-		const playlists = [];
 		const collection = {title: 'COLLECTION'};
 
 		function getChannel() {
 			return Promise.resolve({
 				id: 'abc',
 				secrets: {
-					jwplayerApiKey: 'api-key-foo',
-					jwplayerSecretKey: 'api-secret-bar'
+					apiKey: 'api-key-foo',
+					secretKey: 'api-secret-bar'
 				}
 			});
 		}
@@ -236,7 +242,7 @@ describe('playlistHandler', function () {
 		it('calls client.getPlaylist()', function () {
 			expect(client.getPlaylist).toHaveBeenCalledTimes(1);
 			expect(client.getPlaylist).toHaveBeenCalledWith({
-				labelId: 'foo',
+				playlistId: 'foo',
 				apiKey: 'api-key-foo',
 				secretKey: 'api-secret-bar'
 			});
@@ -245,7 +251,7 @@ describe('playlistHandler', function () {
 		it('calls client.getVideosByPlaylist()', function () {
 			expect(client.getVideosByPlaylist).toHaveBeenCalledTimes(1);
 			expect(client.getVideosByPlaylist).toHaveBeenCalledWith({
-				labelId: 'foo',
+				playlistId: 'foo',
 				apiKey: 'api-key-foo',
 				secretKey: 'api-secret-bar'
 			});

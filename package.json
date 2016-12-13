@@ -4,7 +4,7 @@
   "description": "An Oddworks provider plugin for JWPlayer APIs",
   "main": "index.js",
   "scripts": {
-    "test": "xo && jasmine"
+    "test": "xo && ava"
   },
   "dependencies": {
     "bluebird": "^3.4.1",
@@ -13,8 +13,10 @@
     "yargs": "^4.8.1"
   },
   "devDependencies": {
-    "jasmine": "^2.4.1",
+    "ava": "^0.17.0",
+    "nock": "^9.0.2",
     "oddcast": "^2.1.0",
+    "sinon": "^1.17.6",
     "xo": "^0.16.0"
   },
   "repository": {

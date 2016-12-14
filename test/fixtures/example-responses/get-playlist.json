@@ -1,0 +1,25 @@
+{
+	"status": "ok",
+	"rate_limit": {
+		"reset": 1481735340,
+		"limit": 60,
+		"remaining": 59
+	},
+	"channel": {
+		"description": "Manual Playlist",
+		"videos": {
+			"total": 8
+		},
+		"tags": null,
+		"sort_order": "date-desc",
+		"link": null,
+		"key": "bITKS2O3",
+		"views": 0,
+		"title": "Manual Playlist",
+		"default": false,
+		"tags_mode": "all",
+		"author": null,
+		"custom": {},
+		"type": "manual"
+	}
+}

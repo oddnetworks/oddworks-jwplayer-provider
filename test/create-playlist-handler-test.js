@@ -37,13 +37,25 @@ test.before(() => {
 	nock(
 		`${baseUrl}${PATH_PREFIX}`, {})
 		.get(`/channels/show`)
-		.query(true)
+		.query(params => {
+			return params.channel_key === '12345';
+		})
+		.times(2)
+		.reply(404);
+
+	nock(
+		`${baseUrl}${PATH_PREFIX}`, {})
+		.get(`/channels/show`)
+		.query(params => {
+			return params.channel_key === 'bITKS2O3';
+		})
 		.reply(200, playlistResponse);
 
 	nock(
 		`${baseUrl}${PATH_PREFIX}`, {})
 		.get(`/channels/videos/list`)
 		.query(true)
+		.times(2)
 		.reply(200, videosByPlaylistResponse);
 });
 
@@ -52,7 +64,7 @@ test.beforeEach(() => {
 
 	// mock command for creating a video spec
 	bus.commandHandler({role: 'catalog', cmd: 'setItemSpec'}, spec => {
-		return Promise.resolve({type: 'videoSpec', resource: `res-jwplayer-video-${spec.video.key}`});
+		return Promise.resolve({type: 'videoSpec', resource: `${spec.video.key}`});
 	});
 
 	// create client with initial credentials that will be overridden
@@ -66,36 +78,35 @@ test.beforeEach(() => {
 	playlistHandler = provider.createPlaylistHandler(bus, getChannel, client, collectionTransform);
 });
 
-// test('when JWPlayer playlist not found', t => {
-// 	const spec = {
-// 		channel: channelId,
-// 		type: 'collectionSpec',
-// 		playlistId: 'jwplayer-playlist-foo',
-// 		playlist: {id: '12345'}
-// 	};
+test('when JWPlayer playlist not found', t => {
+	const spec = {
+		channel: channelId,
+		type: 'collectionSpec',
+		playlistId: '12345',
+		playlist: {id: '12345'}
+	};
 
-// 	const obs = new Promise(resolve => {
-// 		bus.observe({level: 'error'}, payload => {
-// 			resolve(payload);
-// 		});
-// 	});
+	const obs = new Promise(resolve => {
+		bus.observe({level: 'error'}, payload => {
+			resolve(payload);
+		});
+	});
 
-// 	t.throws(playlistHandler({spec}), `Playlist not found for id "${spec.playlist.id}`);
-// 	return playlistHandler({spec}).catch(err => {
-// 		return obs.then(event => {
-// 			// test bus event
-// 			console.log('EVENT: ', event);
-// 			t.deepEqual(event.error, {code: 'PLAYLIST_NOT_FOUND'});
-// 			t.is(event.code, 'PLAYLIST_NOT_FOUND');
-// 			t.deepEqual(event.spec, spec);
-// 			t.is(event.message, 'playlist not found');
+	t.throws(playlistHandler({spec}), `JW Player channel not found for id "${spec.playlistId}"`);
+	return playlistHandler({spec}).catch(err => {
+		return obs.then(event => {
+			// test bus event
+			t.deepEqual(event.error, {code: 'JW_CHANNEL_PLAYLIST_NOT_FOUND'});
+			t.is(event.code, 'JW_CHANNEL_PLAYLIST_NOT_FOUND');
+			t.deepEqual(event.spec, spec);
+			t.is(event.message, 'playlist not found');
 
-// 			// test playlist handler rejection
-// 			t.is(err.message, `Playlist not found for id "${spec.playlist.id}"`);
-// 			return event;
-// 		});
-// 	});
-// });
+			// test playlist handler rejection
+			t.is(err.message, `JW Player channel not found for id "${spec.playlistId}"`);
+			return event;
+		});
+	});
+});
 
 test('when JWPlayer playlist found', t => {
 	const spec = {

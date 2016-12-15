@@ -43,15 +43,13 @@ test.before(() => {
 		.reply(200, videoResponse);
 
 	// replace with jw video conversions
-	// nock(
-	// 	'https://cms.api.brightcove.com/v1',
-	// 	{
-	// 		reqheaders: {
-	// 			authorization: cmsAuthHeader
-	// 		}
-	// 	})
-	// 	.get(`/accounts/${accountId}/videos/${videoResponse.id}/sources`)
-	// 	.reply(200, videoSourcesResponse);
+	nock(
+		`${baseUrl}${PATH_PREFIX}`, {})
+		.get(`/videos/show`)
+		.query(params => {
+			return params.video_key === '12345';
+		})
+		.reply(404);
 
 	nock(
 		`${baseUrl}${PATH_PREFIX}`, {})
@@ -84,33 +82,32 @@ test.beforeEach(() => {
 	videoHandler = provider.createVideoHandler(bus, getChannel, client, videoTransform);
 });
 
-// test('when Brightcove video not found', t => {
-// 	const spec = {
-// 		channel,
-// 		type,
-// 		id: 'spec-brightcove-video-12345',
-// 		video: {id: '12345'}
-// 	};
+test('when JWPlayer video not found', t => {
+	const spec = {
+		channel,
+		type,
+		id: 'spec-brightcove-video-12345',
+		video: {id: '12345'}
+	};
 
-// 	const obs = new Promise(resolve => {
-// 		bus.observe({level: 'error'}, payload => {
-// 			resolve(payload);
-// 		});
-// 	});
+	const obs = new Promise(resolve => {
+		bus.observe({level: 'error'}, payload => {
+			resolve(payload);
+		});
+	});
 
-// 	return videoHandler({spec}).catch(err => {
-// 		return obs.then(event => {
-// 			// test bus event
-// 			t.deepEqual(event.error, {code: 'VIDEO_NOT_FOUND'});
-// 			t.is(event.code, 'VIDEO_NOT_FOUND');
-// 			t.deepEqual(event.spec, spec);
-// 			t.is(event.message, 'video not found');
-
-// 			// test video handler rejection
-// 			t.is(err.message, `Video not found for id "${spec.video.id}"`);
-// 		});
-// 	});
-// });
+	return videoHandler({spec}).catch(err => {
+		// test video handler rejection
+		t.is(err.message, `Video not found for id "${spec.video.id}"`);
+		return obs.then(errEvent => {
+			// test bus event
+			t.deepEqual(errEvent.error, {code: 'VIDEO_NOT_FOUND'});
+			t.is(errEvent.code, 'VIDEO_NOT_FOUND');
+			t.deepEqual(errEvent.spec, spec);
+			t.is(errEvent.message, 'video not found');
+		});
+	});
+});
 
 test('when JWPlayer video found', t => {
 	const spec = {

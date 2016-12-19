@@ -10,6 +10,7 @@ REQUEST_METHODS.getPlaylists = '{}';
 REQUEST_METHODS.getPlaylist = '{"playlistId": "STRING"}';
 REQUEST_METHODS.getVideosByPlaylist = '{"playlistId": "STRING"}';
 REQUEST_METHODS.getVideo = '{"videoId": "STRING"}';
+REQUEST_METHODS.getConversionsByVideo = '{"videoId": "STRING"}';
 
 exports.main = function () {
 	const args = yargs

@@ -110,7 +110,7 @@ function requestCommand(args) {
 	});
 
 	return client[method](params).then(res => {
-		console.log(JSON.stringify(res));
+		console.log(JSON.stringify(res, null, 2));
 		return null;
 	});
 }

@@ -34,6 +34,19 @@ jwplayerProvider.initialize(options).then(provider => {
 });
 ```
 
+JW API credentials can also be passed in on the oddworks Channel object in the `secrets: {}` hash like so
+
+```JavaScript
+{
+    type: 'channel',
+    id: 'cartoon-network',
+    secrets: {
+        jwApiKey: '',
+        jwSecretKey: ''
+    }
+}
+```
+
 The initialization process will attach Oddcast listeners for the following queries:
 
 - `bus.query({role: 'provider', cmd: 'get', source: 'jwplayer-playlist-provider'})`

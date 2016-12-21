@@ -75,11 +75,8 @@ exports.createPlaylistHandler = function (bus, getChannel, client, transform) {
 			);
 		}
 
-		// The Oddworks collection.
-		const collection = args.object;
-
 		return getChannel(channelId).then(channel => {
-			return getCollection({spec, channel, collection, playlistId});
+			return getCollection({spec, channel, playlistId});
 		});
 	};
 };

@@ -87,7 +87,7 @@ test('when JWPlayer video not found', t => {
 		channel,
 		type,
 		id: 'spec-brightcove-video-12345',
-		video: {id: '12345'}
+		video: {key: '12345'}
 	};
 
 	const obs = new Promise(resolve => {
@@ -98,7 +98,7 @@ test('when JWPlayer video not found', t => {
 
 	return videoHandler({spec}).catch(err => {
 		// test video handler rejection
-		t.is(err.message, `Video not found for id "${spec.video.id}"`);
+		t.is(err.message, `Video not found for id "${spec.video.key}"`);
 		return obs.then(errEvent => {
 			// test bus event
 			t.deepEqual(errEvent.error, {code: 'VIDEO_NOT_FOUND'});
@@ -114,7 +114,7 @@ test('when JWPlayer video found', t => {
 		channel,
 		type,
 		id: `spec-jwplayer-video-${videoResponse.video.key}`,
-		video: {id: videoResponse.video.key}
+		video: {key: videoResponse.video.key}
 	};
 
 	return videoHandler({spec})

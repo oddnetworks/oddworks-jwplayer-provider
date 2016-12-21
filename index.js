@@ -66,17 +66,17 @@ exports.createPlaylistHandler = function (bus, getChannel, client, transform) {
 	//   args.spec.playlist.id
 	return function jwplayerPlaylistProvider(args) {
 		const spec = args.spec;
-		const playlistId = (spec.playlist || {}).id;
+		const playlistId = (spec.playlist || {}).key;
 		const channelId = spec.channel;
 
 		if (!playlistId || typeof playlistId !== 'string') {
 			throw new Error(
-				'jwplayer-playlist-provider spec.playlist.id String is required'
+				'jwplayer-playlist-provider spec.playlist.key String is required'
 			);
 		}
 
 		return getChannel(channelId).then(channel => {
-			return getCollection({spec, channel, playlistId});
+			return getCollection({spec, channel});
 		});
 	};
 };
@@ -90,17 +90,16 @@ exports.createVideoHandler = function (bus, getChannel, client, transform) {
 	return function jwplayerVideoProvider(args) {
 		const spec = args.spec;
 		const channelId = spec.channel;
-		const video = spec.video || {};
-		const videoId = video.id;
+		const videoId = (spec.video || {}).key;
 
 		if (!videoId || typeof videoId !== 'string') {
 			throw new Error(
-				'jwplayer-video-provider spec.video.id String is not available'
+				'jwplayer-video-provider spec.video.key String is not available'
 			);
 		}
 
 		return getChannel(channelId).then(channel => {
-			return getJWPlayerVideo({spec, channel, videoId});
+			return getJWPlayerVideo({spec, channel});
 		});
 	};
 };

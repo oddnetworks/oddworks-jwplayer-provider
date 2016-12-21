@@ -83,7 +83,7 @@ test('when JWPlayer playlist not found', t => {
 		channel: channelId,
 		type: 'collectionSpec',
 		playlistId: '12345',
-		playlist: {id: '12345'}
+		playlist: {key: '12345'}
 	};
 
 	const obs = new Promise(resolve => {
@@ -113,7 +113,7 @@ test('when JWPlayer playlist found', t => {
 		channel: channelId,
 		type: 'collectionSpec',
 		playlistId: `spec-jwplayer-playlist-${playlistResponse.channel.key}`,
-		playlist: {id: playlistResponse.channel.key}
+		playlist: {key: playlistResponse.channel.key}
 	};
 
 	return playlistHandler({spec})
@@ -132,8 +132,9 @@ test('when JWPlayer playlist found', t => {
 			]);
 
 			// videos are present in relationships
-			t.is(res.relationships.entities.data[0].id, 'res-jwplayer-video-617kMdbG');
-			t.is(res.relationships.entities.data[1].id, 'res-jwplayer-video-F33ExjRC');
-			t.is(res.relationships.entities.data[2].id, 'res-jwplayer-video-F33ExjRC');
+			// Oddworks will ensure these IDs get prefixed with "res-jw-video-".
+			t.is(res.relationships.entities.data[0].id, '617kMdbG');
+			t.is(res.relationships.entities.data[1].id, 'F33ExjRC');
+			t.is(res.relationships.entities.data[2].id, 'F33ExjRC');
 		});
 });

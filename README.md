@@ -1,4 +1,4 @@
-# [WIP] Oddworks JWPlayer Provider
+# Oddworks JWPlayer Provider
 
 An JWPlayer provider plugin for the Oddworks content server.
 
@@ -60,7 +60,7 @@ bus.sendCommand({role: 'catalog', cmd: 'setItemSpec'}, {
     channel: 'abc',
     type: 'collectionSpec',
     source: 'jwplayer-playlist-provider',
-    playlist: {id: '123456'}
+    playlist: {key: '123456'}
 });
 
 // To create a video based on a JWPlayer video:
@@ -68,7 +68,7 @@ bus.sendCommand({role: 'catalog', cmd: 'setItemSpec'}, {
     channel: 'abc',
     type: 'videoSpec',
     source: 'jwplayer-video-provider',
-    video: {id: '123456'}
+    video: {key: '123456'}
 });
 ```
 

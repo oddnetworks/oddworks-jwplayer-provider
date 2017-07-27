@@ -14,7 +14,7 @@ const helpers = require('./helpers');
 
 const apiKey = 'fake-apiKey';
 const secretKey = 'fake-secretKey';
-const baseUrl = 'https://cdn.jwplayer.com';
+const baseUrl = 'https://api.jwplatform.com';
 const PATH_PREFIX = '/v1';
 
 const type = 'videoSpec';

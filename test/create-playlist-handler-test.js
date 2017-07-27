@@ -12,7 +12,7 @@ const helpers = require('./helpers');
 
 const apiKey = 'fake-apiKey';
 const secretKey = 'fake-secretKey';
-const baseUrl = 'https://api.jwplatform.com';
+const baseUrl = 'https://cdn.jwplayer.com';
 const PATH_PREFIX = '/v1';
 
 // mock channel fetching function

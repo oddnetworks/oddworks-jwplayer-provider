@@ -9,7 +9,8 @@ const fetchJWPlayerVideo = require('./lib/fetch-jwplayer-video');
 const fetchJWPlayerCollection = require('./lib/fetch-jwplayer-playlist');
 
 const DEFAULTS = {
-	baseUrl: 'https://api.jwplatform.com',
+	baseUrl: 'https://cdn.jwplayer.com',
+	// baseUrl: 'https://api.jwplatform.com',
 	// baseUrl: 'https://api.jwplayer.com',
 	collectionTransform: defaultCollectionTransform,
 	videoTransform: defaultVideoTransform

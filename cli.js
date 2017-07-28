@@ -14,6 +14,7 @@ REQUEST_METHODS.getVideo = '{"videoId": "STRING"}';
 REQUEST_METHODS.getConversionsByVideo = '{"videoId": "STRING"}';
 REQUEST_METHODS.searchVideos = '{"search": "STRING"}';
 REQUEST_METHODS.searchPlaylists = '{"search": "STRING"}';
+REQUEST_METHODS.v2getMedia = '{"videoId": "STRING"}';
 
 exports.main = function () {
 	const args = yargs

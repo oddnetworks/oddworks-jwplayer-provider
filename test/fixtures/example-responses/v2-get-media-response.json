@@ -1,0 +1,57 @@
+{
+  "feed_instance_id": "89efe7c0-3c4d-4ac3-9d2b-faf603cc4e46",
+  "description": "It wasn't a great week for conservative pundits, but that means it was a great week for the truth",
+  "title": "Think about it: Bill O'Reilly, Tomi Lahren and Alex Jones' losses are big wins for the honest media",
+  "feedid": "O2AWXESU",
+  "playlist": [
+    {
+      "mediaid": "O2AWXESU",
+      "description": "It wasn't a great week for conservative pundits, but that means it was a great week for the truth",
+      "pubdate": 1493035279,
+      "tags": "think about it,Tomi Lahren,Bill O’Reilly,Alex Jones,Salon Series",
+      "image": "https://cdn.jwplayer.com/thumbs/O2AWXESU-720.jpg",
+      "title": "Think about it: Bill O'Reilly, Tomi Lahren and Alex Jones' losses are big wins for the honest media",
+      "feedid": "O2AWXESU",
+      "sources": [
+        {
+          "width": 1280,
+          "type": "application/vnd.apple.mpegurl",
+          "file": "https://cdn.jwplayer.com/manifests/O2AWXESU.m3u8?exp=1501260480&sig=611883f362a0e0b0021be2e7dc8abe04",
+          "height": 720
+        },
+        {
+          "width": 320,
+          "height": 180,
+          "type": "video/mp4",
+          "file": "https://cdn.jwplayer.com/videos/O2AWXESU-XwIdJKT5.mp4?exp=1501260480&sig=c128f0a5143d5cb71f1a27ec2acaa331",
+          "label": "H.264 320px"
+        },
+        {
+          "width": 640,
+          "height": 360,
+          "type": "video/mp4",
+          "file": "https://cdn.jwplayer.com/videos/O2AWXESU-XVrgRg6E.mp4?exp=1501260480&sig=ac606a166427ada9d78b793f78aff1d6",
+          "label": "H.264 640px"
+        },
+        {
+          "width": 1280,
+          "height": 720,
+          "type": "video/mp4",
+          "file": "https://cdn.jwplayer.com/videos/O2AWXESU-rIeu3KKF.mp4?exp=1501260480&sig=d253dd31bfd0d042b96400344e67f1cd",
+          "label": "H.264 1280px"
+        },
+        {
+          "type": "audio/mp4",
+          "file": "https://cdn.jwplayer.com/videos/O2AWXESU-3KUqoNh2.m4a?exp=1501260480&sig=0caafd11faae3cb60815adb87dba14f0",
+          "label": "AAC Audio"
+        }
+      ],
+      "tracks": [
+        {
+          "kind": "thumbnails",
+          "file": "https://cdn.jwplayer.com/strips/O2AWXESU-120.vtt"
+        }
+      ],
+      "link": "http://www.salon.com/?p=14758001",
+      "duration": 135
+    }

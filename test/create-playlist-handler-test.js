@@ -45,6 +45,13 @@ test.before(() => {
 
 	nock(
 		v2baseUrl, {})
+		.get(`/playlists/12345`)
+		.query(true)
+		.times(2)
+		.reply(404);
+
+	nock(
+		v2baseUrl, {})
 		.get(`/playlists/jfDeJZmI`)
 		.query(true)
 		.times(2)
@@ -79,6 +86,7 @@ test.beforeEach(() => {
 });
 
 test('when JWPlayer playlist not found', t => {
+	t.plan(6);
 	const spec = {
 		channel: channelId,
 		type: 'collectionSpec',
@@ -134,13 +142,10 @@ test('when JWPlayer playlist found', t => {
 			]);
 
 			// videos are present in relationships
-			// Oddworks will ensure these IDs get prefixed with "res-jw-video-".
-			res.relationships.entities.data.map(item => {
-				console.log(item);
-				return item;
-			});
 			t.is(res.relationships.entities.data[0].id, 'jwplayer-video-O2AWXESU');
+
 			const length = res.relationships.entities.data.length || 0;
 			t.is(res.relationships.entities.data[length - 1].id, 'jwplayer-video-yjN1PB8E');
+			return res;
 		});
 });

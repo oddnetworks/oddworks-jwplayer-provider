@@ -3,19 +3,17 @@
 const test = require('ava');
 const nock = require('nock');
 const Promise = require('bluebird');
-// const debug = require('debug')('oddworks:provider:brightcove:create-video-handler-test');
+// const debug = require('debug')('oddworks:provider:jwplayer-provider:create-video-handler-test');
 
 const provider = require('../');
 const videoTransform = require('../lib/default-video-transform');
 const formatReleaseDate = require('../lib/utils').formatReleaseDate;
-const videoResponse = require('./fixtures/example-responses/get-video-response');
-const conversionsResponse = require('./fixtures/example-responses/get-conversions-by-video-response');
+const videoResponse = require('./fixtures/example-responses/v2-get-media-response');
 const helpers = require('./helpers');
 
 const apiKey = 'fake-apiKey';
 const secretKey = 'fake-secretKey';
-const baseUrl = 'https://api.jwplatform.com';
-const PATH_PREFIX = '/v1';
+const v2baseUrl = `https://cdn.jwplayer.com/v2`;
 
 const type = 'videoSpec';
 
@@ -36,37 +34,16 @@ let videoHandler = null;
 
 test.before(() => {
 	nock(
-		`${baseUrl}${PATH_PREFIX}`, {})
-		.get(`/channels/videos/list`)
+		`${v2baseUrl}`, {})
+		.get(`/media/12345`)
 		.query(true)
-		.times(2)
-		.reply(200, videoResponse);
-
-	// replace with jw video conversions
-	nock(
-		`${baseUrl}${PATH_PREFIX}`, {})
-		.get(`/videos/show`)
-		.query(params => {
-			return params.video_key === '12345';
-		})
 		.reply(404);
 
 	nock(
-		`${baseUrl}${PATH_PREFIX}`, {})
-		.get(`/videos/show`)
-		.query(params => {
-			return params.video_key === '617kMdbG';
-		})
+		`${v2baseUrl}`, {})
+		.get(`/media/O2AWXESU`)
+		.query(true)
 		.reply(200, videoResponse);
-
-	nock(
-		`${baseUrl}${PATH_PREFIX}`, {})
-		.get(`/videos/conversions/list`)
-		.query(params => {
-			return params.video_key === '617kMdbG';
-		})
-		.times(2)
-		.reply(200, conversionsResponse);
 });
 
 test.beforeEach(() => {
@@ -83,11 +60,13 @@ test.beforeEach(() => {
 });
 
 test('when JWPlayer video not found', t => {
+	t.plan(5);
+
 	const spec = {
 		channel,
 		type,
 		id: 'spec-brightcove-video-12345',
-		video: {key: '12345'}
+		video: {mediaid: '12345'}
 	};
 
 	const obs = new Promise(resolve => {
@@ -98,7 +77,7 @@ test('when JWPlayer video not found', t => {
 
 	return videoHandler({spec}).catch(err => {
 		// test video handler rejection
-		t.is(err.message, `Video not found for id "${spec.video.key}"`);
+		t.is(err.message, `Video not found for id "${spec.video.mediaid}"`);
 		return obs.then(errEvent => {
 			// test bus event
 			t.deepEqual(errEvent.error, {code: 'VIDEO_NOT_FOUND'});
@@ -110,11 +89,13 @@ test('when JWPlayer video not found', t => {
 });
 
 test('when JWPlayer video found', t => {
+	t.plan(8);
+	const mediaid = videoResponse.playlist[0].mediaid;
 	const spec = {
 		channel,
 		type,
-		id: `spec-jwplayer-video-${videoResponse.video.key}`,
-		video: {key: videoResponse.video.key}
+		id: `spec-jwplayer-video-${mediaid}`,
+		video: {mediaid}
 	};
 
 	return videoHandler({spec})
@@ -129,19 +110,18 @@ test('when JWPlayer video found', t => {
 				'cast',
 				'duration',
 				'genres',
-				'meta',
 				'releaseDate',
 				'tags'
 			]);
 
-			t.is(res.id, `res-jwplayer-video-${videoResponse.video.key}`);
-			t.is(res.title, videoResponse.video.title);
-			t.is(res.description, videoResponse.video.description);
+			t.is(res.id, `res-jwplayer-video-${mediaid}`);
+			t.is(res.title, videoResponse.playlist[0].title);
+			t.is(res.description, videoResponse.playlist[0].description);
 
 			t.is(res.images.length, 6);
-			t.is(res.sources.length, 6);
+			t.is(res.sources.length, 5);
 
-			t.is(res.duration, Math.round((videoResponse.video.duration || 0) * 1000));
-			t.is(res.releaseDate, formatReleaseDate(videoResponse.video.date));
+			t.is(res.duration, Math.round((videoResponse.playlist[0].duration || 0) * 1000));
+			t.is(res.releaseDate, formatReleaseDate(videoResponse.playlist[0].pubdate));
 		});
 });

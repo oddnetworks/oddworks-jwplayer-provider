@@ -90,11 +90,11 @@ exports.createVideoHandler = function (bus, getChannel, client, transform) {
 	return function jwplayerVideoProvider(args) {
 		const spec = args.spec;
 		const channelId = spec.channel;
-		const videoId = (spec.video || {}).key;
+		const videoId = (spec.video || {}).mediaid;
 
 		if (!videoId || typeof videoId !== 'string') {
 			throw new Error(
-				'jwplayer-video-provider spec.video.key String is not available'
+				'jwplayer-video-provider spec.video.mediaid String is not available'
 			);
 		}
 

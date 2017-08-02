@@ -1,6 +1,6 @@
 {
   "name": "oddworks-jwplayer-provider",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "An Oddworks provider plugin for JWPlayer APIs",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,7 @@
     "bluebird": "^3.4.1",
     "boom": "^3.2.2",
     "debug": "^2.4.5",
+    "jsonwebtoken": "^7.4.1",
     "request": "^2.74.0",
     "yargs": "^4.8.1"
   },

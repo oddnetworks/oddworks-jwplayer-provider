@@ -7,13 +7,13 @@ const nock = require('nock');
 const provider = require('../');
 const collectionTransform = require('../lib/default-collection-transform');
 const playlistResponse = require('./fixtures/example-responses/get-playlist-response');
-const videosByPlaylistResponse = require('./fixtures/example-responses/get-videos-by-playlist-response');
+const v2playlistResponse = require('./fixtures/example-responses/v2-get-playlist-response');
 const helpers = require('./helpers');
 
 const apiKey = 'fake-apiKey';
 const secretKey = 'fake-secretKey';
-const baseUrl = 'https://api.jwplatform.com';
-const PATH_PREFIX = '/v1';
+const v1baseUrl = 'https://api.jwplatform.com/v1';
+const v2baseUrl = 'https://cdn.jwplayer.com/v2';
 
 // mock channel fetching function
 const channelId = 'fake-channel';
@@ -35,7 +35,7 @@ let playlistHandler = null;
 test.before(() => {
 	// mock API calls
 	nock(
-		`${baseUrl}${PATH_PREFIX}`, {})
+		v1baseUrl, {})
 		.get(`/channels/show`)
 		.query(params => {
 			return params.channel_key === '12345';
@@ -44,19 +44,26 @@ test.before(() => {
 		.reply(404);
 
 	nock(
-		`${baseUrl}${PATH_PREFIX}`, {})
-		.get(`/channels/show`)
-		.query(params => {
-			return params.channel_key === 'bITKS2O3';
-		})
-		.reply(200, playlistResponse);
-
-	nock(
-		`${baseUrl}${PATH_PREFIX}`, {})
-		.get(`/channels/videos/list`)
+		v2baseUrl, {})
+		.get(`/playlists/12345`)
 		.query(true)
 		.times(2)
-		.reply(200, videosByPlaylistResponse);
+		.reply(404);
+
+	nock(
+		v2baseUrl, {})
+		.get(`/playlists/jfDeJZmI`)
+		.query(true)
+		.times(2)
+		.reply(200, v2playlistResponse);
+
+	nock(
+		v1baseUrl, {})
+		.get(`/channels/show`)
+		.query(params => {
+			return params.channel_key === 'jfDeJZmI';
+		})
+		.reply(200, playlistResponse);
 });
 
 test.beforeEach(() => {
@@ -64,7 +71,7 @@ test.beforeEach(() => {
 
 	// mock command for creating a video spec
 	bus.commandHandler({role: 'catalog', cmd: 'setItemSpec'}, spec => {
-		return Promise.resolve({type: 'videoSpec', resource: `${spec.video.key}`});
+		return Promise.resolve({type: 'videoSpec', resource: `${spec.video.mediaid}`});
 	});
 
 	// create client with initial credentials that will be overridden
@@ -79,6 +86,7 @@ test.beforeEach(() => {
 });
 
 test('when JWPlayer playlist not found', t => {
+	t.plan(6);
 	const spec = {
 		channel: channelId,
 		type: 'collectionSpec',
@@ -118,7 +126,9 @@ test('when JWPlayer playlist found', t => {
 
 	return playlistHandler({spec})
 		.then(res => {
+			t.plan(3);
 			const keys = Object.keys(res);
+
 			t.deepEqual(keys, [
 				'id',
 				'title',
@@ -132,9 +142,10 @@ test('when JWPlayer playlist found', t => {
 			]);
 
 			// videos are present in relationships
-			// Oddworks will ensure these IDs get prefixed with "res-jw-video-".
-			t.is(res.relationships.entities.data[0].id, '617kMdbG');
-			t.is(res.relationships.entities.data[1].id, 'F33ExjRC');
-			t.is(res.relationships.entities.data[2].id, 'F33ExjRC');
+			t.is(res.relationships.entities.data[0].id, 'jwplayer-video-O2AWXESU');
+
+			const length = res.relationships.entities.data.length || 0;
+			t.is(res.relationships.entities.data[length - 1].id, 'jwplayer-video-yjN1PB8E');
+			return res;
 		});
 });

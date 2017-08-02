@@ -21,7 +21,7 @@ test.before(() => {
 	});
 });
 
-test('Correct mimetypes are returned from example jw response', t => {
+test('Correct containers are returned from example jw response', t => {
 	t.plan(testResponses.length);
 	for (let i = 0; i < testResponses.length; i++) {
 		t.is(testResponses[i], correctResponses[i]);

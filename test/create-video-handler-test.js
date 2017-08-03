@@ -111,7 +111,8 @@ test('when JWPlayer video found', t => {
 				'duration',
 				'genres',
 				'releaseDate',
-				'tags'
+				'tags',
+				'meta'
 			]);
 
 			t.is(res.id, `res-jwplayer-video-${mediaid}`);

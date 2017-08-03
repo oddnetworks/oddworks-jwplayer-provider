@@ -2,7 +2,7 @@
 
 const test = require('ava');
 
-const mimetypeFromSource = require('../lib/utils').mimetypeFromSource;
+const utils = require('../').utils;
 const videoResponse = require('./fixtures/example-responses/v2-get-media-response');
 
 const correctResponses = [
@@ -16,6 +16,7 @@ const correctResponses = [
 let testResponses = [];
 
 test.before(() => {
+	const mimetypeFromSource = utils.mimetypeFromSource;
 	testResponses = videoResponse.playlist[0].sources.map(source => {
 		return mimetypeFromSource(source);
 	});

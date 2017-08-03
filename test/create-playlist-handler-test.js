@@ -137,6 +137,8 @@ test('when JWPlayer playlist found', t => {
 				'genres',
 				'images',
 				'meta',
+				'tags',
+				'cast',
 				'releaseDate',
 				'relationships'
 			]);

@@ -2,7 +2,7 @@
 
 const test = require('ava');
 
-const containerFromSource = require('../lib/utils').containerFromSource;
+const utils = require('../').utils;
 const videoResponse = require('./fixtures/example-responses/v2-get-media-response');
 
 const correctResponses = [
@@ -16,6 +16,7 @@ const correctResponses = [
 let testResponses = [];
 
 test.before(() => {
+	const containerFromSource = utils.containerFromSource;
 	testResponses = videoResponse.playlist[0].sources.map(source => {
 		return containerFromSource(source);
 	});

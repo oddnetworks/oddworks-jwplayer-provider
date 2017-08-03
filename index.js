@@ -7,6 +7,7 @@ const defaultCollectionTransform = require('./lib/default-collection-transform')
 const createChannelCache = require('./lib/create-channel-cache');
 const fetchJWPlayerVideo = require('./lib/fetch-jwplayer-video');
 const fetchJWPlayerCollection = require('./lib/fetch-jwplayer-playlist');
+const utils = require('./lib/utils');
 
 const DEFAULTS = {
 	baseUrl: 'https://api.jwplatform.com',
@@ -125,3 +126,5 @@ exports.createClient = function (options) {
 
 	return new Client({bus, baseUrl, secretKey, apiKey});
 };
+
+exports.utils = utils;

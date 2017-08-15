@@ -60,6 +60,7 @@ test.before(() => {
 	nock(
 		v1baseUrl, {})
 		.get(`/channels/show`)
+		.times(2)
 		.query(params => {
 			return params.channel_key === 'jfDeJZmI';
 		})
@@ -122,6 +123,42 @@ test('when JWPlayer playlist found', t => {
 		type: 'collectionSpec',
 		playlistId: `spec-jwplayer-playlist-${playlistResponse.channel.key}`,
 		playlist: {key: playlistResponse.channel.key}
+	};
+
+	return playlistHandler({spec})
+		.then(res => {
+			t.plan(3);
+			const keys = Object.keys(res);
+
+			t.deepEqual(keys, [
+				'id',
+				'title',
+				'type',
+				'description',
+				'genres',
+				'images',
+				'meta',
+				'tags',
+				'cast',
+				'releaseDate',
+				'relationships'
+			]);
+
+			// videos are present in relationships
+			t.is(res.relationships.entities.data[0].id, 'jwplayer-video-O2AWXESU');
+
+			const length = res.relationships.entities.data.length || 0;
+			t.is(res.relationships.entities.data[length - 1].id, 'jwplayer-video-yjN1PB8E');
+			return res;
+		});
+});
+
+test('when JWPlayer playlist found with id in the spec', t => {
+	const spec = {
+		channel: channelId,
+		type: 'collectionSpec',
+		id: `spec-jwplayer-playlist-${playlistResponse.channel.key}`,
+		playlist: {id: playlistResponse.channel.key}
 	};
 
 	return playlistHandler({spec})

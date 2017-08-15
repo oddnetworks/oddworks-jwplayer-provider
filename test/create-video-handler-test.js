@@ -42,6 +42,7 @@ test.before(() => {
 	nock(
 		`${v2baseUrl}`, {})
 		.get(`/media/O2AWXESU`)
+		.times(2)
 		.query(true)
 		.reply(200, videoResponse);
 });
@@ -116,6 +117,45 @@ test('when JWPlayer video found', t => {
 			]);
 
 			t.is(res.id, `res-jwplayer-video-${mediaid}`);
+			t.is(res.title, videoResponse.playlist[0].title);
+			t.is(res.description, videoResponse.playlist[0].description);
+
+			t.is(res.images.length, 6);
+			t.is(res.sources.length, 5);
+
+			t.is(res.duration, Math.round((videoResponse.playlist[0].duration || 0) * 1000));
+			t.is(res.releaseDate, formatReleaseDate(videoResponse.playlist[0].pubdate));
+		});
+});
+
+test('when JWPlayer video found with spec.id', t => {
+	t.plan(8);
+	const id = videoResponse.playlist[0].mediaid;
+	const spec = {
+		channel,
+		type,
+		id: `spec-jwplayer-video-${id}`,
+		video: {id}
+	};
+
+	return videoHandler({spec})
+		.then(res => {
+			t.deepEqual(Object.keys(res), [
+				'id',
+				'type',
+				'title',
+				'description',
+				'images',
+				'sources',
+				'cast',
+				'duration',
+				'genres',
+				'releaseDate',
+				'tags',
+				'meta'
+			]);
+
+			t.is(res.id, `res-jwplayer-video-${id}`);
 			t.is(res.title, videoResponse.playlist[0].title);
 			t.is(res.description, videoResponse.playlist[0].description);
 

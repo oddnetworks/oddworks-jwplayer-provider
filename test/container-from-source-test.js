@@ -10,7 +10,7 @@ const correctResponses = [
 	'mp4',
 	'mp4',
 	'mp4',
-	''
+	'mp4'
 ];
 
 let testResponses = [];

@@ -6,10 +6,6 @@
   "scripts": {
     "test": "xo"
   },
-  "dependencies": {
-  },
-  "devDependencies": {
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oddnetworks/oddworks-jwplayer-provider.git"
@@ -17,6 +13,7 @@
   "keywords": [
     "Oddworks",
     "JWPlayer",
+    "API",
     "Video",
     "Source",
     "Provider"
@@ -27,10 +24,18 @@
     "url": "https://github.com/oddnetworks/oddworks-jwplayer-provider/issues"
   },
   "homepage": "https://github.com/oddnetworks/oddworks-jwplayer-provider#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "xo": "0.18.2"
+  },
   "xo": {
     "esnext": true,
     "envs": [
       "node"
-    ]
+    ],
+    "rules": {
+      "quotes": ["error", "backtick"],
+      "no-console": ["error"]
+    }
   }
 }

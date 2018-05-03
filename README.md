@@ -1,5 +1,7 @@
 # Oddworks JWPlayer Provider
 
+[![pipeline status](https://gitlab.com/oddnetworks/oddworks/jwplayer-provider/badges/master/pipeline.svg)](https://gitlab.com/oddnetworks/oddworks/jwplayer-provider/commits/master)
+
 An JWPlayer provider plugin for the Oddworks content server.
 
 Installation

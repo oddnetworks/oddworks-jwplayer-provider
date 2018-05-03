@@ -7,11 +7,11 @@
     "test": "xo && ava"
   },
   "dependencies": {
-    "bluebird": "^3.4.1",
-    "boom": "^3.2.2",
-    "debug": "^2.4.5",
-    "jsonwebtoken": "^7.4.1",
-    "request": "^2.74.0",
+    "bluebird": "~3.5.1",
+    "boom": "~7.2.0",
+    "debug": "~3.1.0",
+    "jsonwebtoken": "~8.2.1",
+    "request": "~2.85.0",
     "yargs": "^4.8.1"
   },
   "devDependencies": {

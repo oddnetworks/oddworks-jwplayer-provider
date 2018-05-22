@@ -7,19 +7,19 @@
     "test": "xo && ava"
   },
   "dependencies": {
-    "bluebird": "~3.5.1",
-    "boom": "~7.2.0",
-    "debug": "~3.1.0",
-    "jsonwebtoken": "~8.2.1",
-    "request": "~2.85.0",
-    "yargs": "^4.8.1"
+    "bluebird": "3.x.x",
+    "boom": "7.x.x",
+    "debug": "3.x.x",
+    "jsonwebtoken": "8.x.x",
+    "request": "^2.87.0",
+    "yargs": "4.x.x"
   },
   "devDependencies": {
-    "ava": "^0.17.0",
-    "nock": "^9.0.2",
-    "oddcast": "^2.1.0",
-    "sinon": "^1.17.6",
-    "xo": "^0.16.0"
+    "ava": "^0.25.0",
+    "nock": "^9.2.6",
+    "oddcast": "^2.2.2",
+    "sinon": "1.x.x",
+    "xo": "^0.21.1"
   },
   "repository": {
     "type": "git",

@@ -44,7 +44,11 @@
       "node"
     ],
     "rules": {
-      "no-use-extend-native/no-use-extend-native": 0
+      "no-use-extend-native/no-use-extend-native": 0,
+      "ava/prefer-async-await": 0,
+      "prefer-destructuring": 0,
+      "unicorn/import-index": 0,
+      "capitalized-comments": 0
     }
   }
 }

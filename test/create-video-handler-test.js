@@ -3,7 +3,6 @@
 const test = require('ava');
 const nock = require('nock');
 const Promise = require('bluebird');
-// const debug = require('debug')('oddworks:provider:jwplayer-provider:create-video-handler-test');
 
 const provider = require('../');
 const videoTransform = require('../lib/default-video-transform');

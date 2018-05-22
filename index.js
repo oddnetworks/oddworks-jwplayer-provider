@@ -22,7 +22,7 @@ const DEFAULTS = {
 // options.apiKey
 // options.collectionTransform
 // options.assetTransform
-exports.initialize = function (options) {
+exports.initialize = options => {
 	options = Object.assign({}, DEFAULTS, options || {});
 
 	const bus = options.bus;
@@ -59,13 +59,13 @@ exports.initialize = function (options) {
 	});
 };
 
-exports.createPlaylistHandler = function (bus, getChannel, client, transform) {
+exports.createPlaylistHandler = (bus, getChannel, client, transform) => {
 	const getCollection = fetchJWPlayerCollection(bus, client, transform);
 
 	// Called from Oddworks core via bus.query
 	// Expects:
 	//   args.spec.playlist.id
-	return function jwplayerPlaylistProvider(args) {
+	return args => {
 		const spec = args.spec;
 		const playlistId = (spec.playlist || {}).key || (spec.playlist || {}).id;
 		const channelId = spec.channel;
@@ -82,13 +82,13 @@ exports.createPlaylistHandler = function (bus, getChannel, client, transform) {
 	};
 };
 
-exports.createVideoHandler = function (bus, getChannel, client, transform) {
+exports.createVideoHandler = (bus, getChannel, client, transform) => {
 	const getJWPlayerVideo = fetchJWPlayerVideo(bus, client, transform);
 
 	// Called from Oddworks core via bus.query
 	// Expects:
 	//   args.spec.video
-	return function jwplayerVideoProvider(args) {
+	return args => {
 		const spec = args.spec;
 		const channelId = spec.channel;
 		const videoId = (spec.video || {}).mediaid || (spec.video || {}).id;
@@ -109,7 +109,7 @@ exports.createVideoHandler = function (bus, getChannel, client, transform) {
 // options.apiKey *required
 // options.bus *optional
 // options.baseUrl *optional
-exports.createClient = function (options) {
+exports.createClient = options => {
 	options = Object.assign({}, DEFAULTS, options || {});
 
 	const bus = options.bus;

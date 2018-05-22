@@ -16,7 +16,7 @@ REQUEST_METHODS.searchVideos = '{"search": "STRING"}';
 REQUEST_METHODS.searchPlaylists = '{"search": "STRING"}';
 REQUEST_METHODS.getMedia = '{"videoId": "STRING"}';
 
-exports.main = function () {
+exports.main = () => {
 	const args = yargs
 		.usage('Usage: $0 <command> [options]')
 		.command('req', 'Make an jwplayer client request', {

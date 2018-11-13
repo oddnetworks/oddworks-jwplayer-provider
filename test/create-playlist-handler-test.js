@@ -145,10 +145,10 @@ test('when JWPlayer playlist found', t => {
 			]);
 
 			// videos are present in relationships
-			t.is(res.relationships.entities.data[0].id, 'jwplayer-video-O2AWXESU');
+			t.is(res.relationships.entities.data[0].id, 'res-jwplayer-video-fake-channel-O2AWXESU');
 
 			const length = res.relationships.entities.data.length || 0;
-			t.is(res.relationships.entities.data[length - 1].id, 'jwplayer-video-yjN1PB8E');
+			t.is(res.relationships.entities.data[length - 1].id, 'res-jwplayer-video-fake-channel-yjN1PB8E');
 			return res;
 		});
 });
@@ -181,10 +181,10 @@ test('when JWPlayer playlist found with id in the spec', t => {
 			]);
 
 			// videos are present in relationships
-			t.is(res.relationships.entities.data[0].id, 'jwplayer-video-O2AWXESU');
+			t.is(res.relationships.entities.data[0].id, 'res-jwplayer-video-fake-channel-O2AWXESU');
 
 			const length = res.relationships.entities.data.length || 0;
-			t.is(res.relationships.entities.data[length - 1].id, 'jwplayer-video-yjN1PB8E');
+			t.is(res.relationships.entities.data[length - 1].id, 'res-jwplayer-video-fake-channel-yjN1PB8E');
 			return res;
 		});
 });

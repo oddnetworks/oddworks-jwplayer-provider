@@ -91,10 +91,11 @@ test('when JWPlayer video not found', t => {
 test('when JWPlayer video found', t => {
 	t.plan(8);
 	const mediaid = videoResponse.playlist[0].mediaid;
+	const idSuffix = provider.utils.composeVideoId(channel, mediaid);
 	const spec = {
 		channel,
 		type,
-		id: `spec-jwplayer-video-${mediaid}`,
+		id: `spec-${idSuffix}`,
 		video: {mediaid}
 	};
 
@@ -115,7 +116,7 @@ test('when JWPlayer video found', t => {
 				'meta'
 			]);
 
-			t.is(res.id, `res-jwplayer-video-${mediaid}`);
+			t.is(res.id, `res-${idSuffix}`);
 			t.is(res.title, videoResponse.playlist[0].title);
 			t.is(res.description, videoResponse.playlist[0].description);
 
@@ -130,10 +131,11 @@ test('when JWPlayer video found', t => {
 test('when JWPlayer video found with spec.id', t => {
 	t.plan(8);
 	const id = videoResponse.playlist[0].mediaid;
+	const idSuffix = provider.utils.composeVideoId(channel, id);
 	const spec = {
 		channel,
 		type,
-		id: `spec-jwplayer-video-${id}`,
+		id: `spec-${idSuffix}`,
 		video: {id}
 	};
 
@@ -154,7 +156,7 @@ test('when JWPlayer video found with spec.id', t => {
 				'meta'
 			]);
 
-			t.is(res.id, `res-jwplayer-video-${id}`);
+			t.is(res.id, `res-${idSuffix}`);
 			t.is(res.title, videoResponse.playlist[0].title);
 			t.is(res.description, videoResponse.playlist[0].description);
 

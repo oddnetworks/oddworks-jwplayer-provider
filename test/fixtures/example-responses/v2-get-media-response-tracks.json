@@ -1,0 +1,72 @@
+{
+  "feed_instance_id": "fb761d1c-78a3-4c27-ad3d-04db2a32daa6",
+  "title": "Beezer Double IPA",
+  "kind": "Single Item",
+  "playlist": [{
+    "mediaid": "iPj4V7h1",
+    "description": "What burger will pair best with the citrus flavor of this double dry hopped IPA?",
+    "pubdate": 1548445062,
+    "tags": "Burgers And Beers",
+    "image": "https://cdn.jwplayer.com/thumbs/iPj4V7h1-720.jpg",
+    "title": "Beezer Double IPA",
+    "variations": {},
+    "sources": [{
+        "type": "application/vnd.apple.mpegurl",
+        "file": "https://cdn.jwplayer.com/manifests/iPj4V7h1.m3u8?exp=1548707040&sig=267f0d160fa139e8875bc70d5c5e898f"
+      },
+      {
+        "width": 320,
+        "height": 180,
+        "type": "video/mp4",
+        "file": "https://cdn.jwplayer.com/videos/iPj4V7h1-MeTnDsMt.mp4?exp=1548707040&sig=7b9f8649b3767f3fda7e78a779486a6a",
+        "label": "180p"
+      },
+      {
+        "width": 480,
+        "height": 270,
+        "type": "video/mp4",
+        "file": "https://cdn.jwplayer.com/videos/iPj4V7h1-qIm0nX0b.mp4?exp=1548707040&sig=ebe97c4980d1c71cdab5168327d5b373",
+        "label": "270p"
+      },
+      {
+        "width": 720,
+        "height": 406,
+        "type": "video/mp4",
+        "file": "https://cdn.jwplayer.com/videos/iPj4V7h1-a2l3ADU9.mp4?exp=1548707040&sig=3415579f822eddf1f848831c4e187855",
+        "label": "406p"
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "type": "video/mp4",
+        "file": "https://cdn.jwplayer.com/videos/iPj4V7h1-0ZIQ5pGE.mp4?exp=1548707040&sig=2730ec39f7846b167dac546df864c7c7",
+        "label": "720p"
+      },
+      {
+        "type": "audio/mp4",
+        "file": "https://cdn.jwplayer.com/videos/iPj4V7h1-GdTDEhB6.m4a?exp=1548707040&sig=9a2e4e1f81a2e2eb3540adb3dadd32d5",
+        "label": "AAC Audio"
+      },
+      {
+        "width": 1920,
+        "height": 1080,
+        "type": "video/mp4",
+        "file": "https://cdn.jwplayer.com/videos/iPj4V7h1-p0asyNFz.mp4?exp=1548707040&sig=0496a98f52cb237a493cf7ff9fba5651",
+        "label": "1080p"
+      }
+    ],
+    "tracks": [{
+        "kind": "thumbnails",
+        "file": "https://cdn.jwplayer.com/strips/iPj4V7h1-120.vtt"
+      },
+      {
+        "kind": "captions",
+        "file": "https://cdn.jwplayer.com/captions/iPj4V7h1-en.vtt",
+        "label": "English"
+      }
+    ],
+    "link": "https://cdn.jwplayer.com/previews/iPj4V7h1?exp=1548707040&sig=5225f55d09a730334349e58008fd91f6",
+    "duration": 356
+  }],
+  "description": "What burger will pair best with the citrus flavor of this double dry hopped IPA?"
+}
